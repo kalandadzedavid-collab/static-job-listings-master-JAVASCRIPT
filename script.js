@@ -151,11 +151,34 @@ const data = [
   },
 ];
 
+let filteredData = [];
+
 const mainElement = document.querySelector("main");
+const searchInput = document.querySelector("#search-input");
+
+renderCompanies(data)
+
+searchInput.addEventListener("input", () => {
+  let searchWord = searchInput.value;
+
+  filteredData = data.filter((company) => {
+    return (
+      company.role.toLowerCase().includes(searchWord.toLocaleLowerCase().trim()) ||
+      company.level.toLowerCase().includes(searchWord.toLocaleLowerCase().trim()) ||
+      company.languages.some((lang) => lang.toLowerCase().includes(searchWord.toLowerCase().trim())) ||
+      company.tools.some((tool) => tool.toLowerCase().includes(searchWord.toLowerCase().trim()))
+    );
+  });
+
+  renderCompanies(filteredData)
+});
+
+
+function renderCompanies (array) {
 
 let finalString = ``;
 
-data.forEach((company) => {
+array.forEach((company) => {
   const companyTemplate = `
     
       <div class="company">
@@ -203,13 +226,17 @@ data.forEach((company) => {
         
           <button class="tag">${company.role}</button>
           <button class="tag">${company.level}</button>
-          ${company.languages.map((language) => {
-            return `<button class="tag">${language}</button>`;
-          })}
+          ${company.languages
+            .map((language) => {
+              return `<button class="tag">${language}</button>`;
+            })
+            .join(" ")}
 
-           ${company.tools.map((language) => {
-            return `<button class="tag">${language}</button>`;
-          })}
+           ${company.tools
+             .map((language) => {
+               return `<button class="tag">${language}</button>`;
+             })
+             .join(" ")}
         </div>
       </div>
     
@@ -218,8 +245,6 @@ data.forEach((company) => {
   finalString += companyTemplate;
 });
 
-mainElement.innerHTML = finalString
+mainElement.innerHTML = finalString;
 
-
-
-
+}
