@@ -13,7 +13,7 @@ body {
 }
 
 @mixin responsive {
-  @media (min-width: 426px) {
+  @media (min-width: 1240px) {
     @content;
   }
 }
@@ -31,7 +31,7 @@ header {
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 
   #search-input {
     width: 100%;
@@ -40,15 +40,19 @@ header {
     border-radius: 5px;
     font-size: 16px;
     outline: none;
+    margin-top: -20px;
   }
 
   .search-box {
-    padding: 20px 103px 20px 19px;
+    padding: 20px;
     width: 100%;
     border-radius: 5px;
     background: #fff;
     box-shadow: 0 15px 20px -5px rgba(13, 113, 130, 0.15);
-    margin-bottom: -76px;
+    margin-bottom: -50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .tech {
@@ -87,6 +91,8 @@ header {
   @include responsive() {
     background: url(./images/bg-header-desktop.svg);
     background-color: #5ca5a5;
+    padding-left: 165px;
+    padding-right: 165px;
   }
 }
 
@@ -103,6 +109,22 @@ main {
     align-items: start;
     justify-content: start;
 
+    @include responsive() {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      padding-left: 152px;
+
+      img {
+        position: absolute;
+        width: 88px !important;
+        height: 88px !important;
+        left: 35px;
+        top: 100px;
+      }
+    }
+
     .info1 {
       display: flex;
       width: 100%;
@@ -117,6 +139,11 @@ main {
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+
+        @include responsive() {
+          margin-right: 15px;
+          font-size: 18px;
+        }
       }
 
       .newTag {
@@ -166,6 +193,10 @@ main {
       font-weight: 700;
       line-height: 24px; /* 160% */
       margin: 9px 0;
+
+      @include responsive() {
+        font-size: 22px;
+      }
     }
 
     img {
@@ -187,6 +218,10 @@ main {
       font-weight: 500;
       line-height: 24px; /* 150% */
       letter-spacing: -0.123px;
+
+      @include responsive(){
+        font-size: 18px;
+      }
     }
   }
 
@@ -217,5 +252,20 @@ main {
       border-radius: 4px;
       background-color: #eff7f7;
     }
+
+    @include responsive() {
+      flex-wrap: nowrap;
+    }
+  }
+
+  @include responsive() {
+    padding-left: 165px;
+    padding-right: 165px;
+  }
+}
+
+@include responsive() {
+  hr {
+    display: none;
   }
 }

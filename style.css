@@ -24,7 +24,7 @@ header {
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 header #search-input {
   width: 100%;
@@ -33,14 +33,18 @@ header #search-input {
   border-radius: 5px;
   font-size: 16px;
   outline: none;
+  margin-top: -20px;
 }
 header .search-box {
-  padding: 20px 103px 20px 19px;
+  padding: 20px;
   width: 100%;
   border-radius: 5px;
   background: #fff;
   box-shadow: 0 15px 20px -5px rgba(13, 113, 130, 0.15);
-  margin-bottom: -76px;
+  margin-bottom: -50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 header .tech {
   background-color: #eff7f7;
@@ -72,10 +76,12 @@ header .tech .closeBtn img {
   width: 13.435px;
   height: 13.435px;
 }
-@media (min-width: 426px) {
+@media (min-width: 1240px) {
   header {
     background: url(./images/bg-header-desktop.svg);
     background-color: #5ca5a5;
+    padding-left: 165px;
+    padding-right: 165px;
   }
 }
 
@@ -93,6 +99,22 @@ main .company {
   align-items: start;
   justify-content: start;
 }
+@media (min-width: 1240px) {
+  main .company {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding-left: 152px;
+  }
+  main .company img {
+    position: absolute;
+    width: 88px !important;
+    height: 88px !important;
+    left: 35px;
+    top: 100px;
+  }
+}
 main .company .info1 {
   display: flex;
   width: 100%;
@@ -107,6 +129,12 @@ main .company .info1 .companyName {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+@media (min-width: 1240px) {
+  main .company .info1 .companyName {
+    margin-right: 15px;
+    font-size: 18px;
+  }
 }
 main .company .info1 .newTag {
   color: #fff;
@@ -153,6 +181,11 @@ main .company .profession {
   line-height: 24px; /* 160% */
   margin: 9px 0;
 }
+@media (min-width: 1240px) {
+  main .company .profession {
+    font-size: 22px;
+  }
+}
 main .company img {
   width: 48px;
   height: 48px;
@@ -171,6 +204,11 @@ main .info2 span {
   font-weight: 500;
   line-height: 24px; /* 150% */
   letter-spacing: -0.123px;
+}
+@media (min-width: 1240px) {
+  main .info2 span {
+    font-size: 18px;
+  }
 }
 main hr {
   width: 100%;
@@ -199,4 +237,21 @@ main .companyTags .tag {
   height: 32px;
   border-radius: 4px;
   background-color: #eff7f7;
+}
+@media (min-width: 1240px) {
+  main .companyTags {
+    flex-wrap: nowrap;
+  }
+}
+@media (min-width: 1240px) {
+  main {
+    padding-left: 165px;
+    padding-right: 165px;
+  }
+}
+
+@media (min-width: 1240px) {
+  hr {
+    display: none;
+  }
 }/*# sourceMappingURL=style.css.map */

@@ -152,34 +152,29 @@ const data = [
 ];
 
 let filteredData = [];
-
+let searchWords = [];
 const mainElement = document.querySelector("main");
 const searchInput = document.querySelector("#search-input");
 
-renderCompanies(data)
+renderCompanies(data);
 
 searchInput.addEventListener("input", () => {
-  let searchWord = searchInput.value;
+  searchWords = searchInput.value
+    .split(" ")
+    .filter((item) => item !== "")
+    .map((item) => item.toLowerCase());
+  console.log(searchWords);
 
-  filteredData = data.filter((company) => {
-    return (
-      company.role.toLowerCase().includes(searchWord.toLocaleLowerCase().trim()) ||
-      company.level.toLowerCase().includes(searchWord.toLocaleLowerCase().trim()) ||
-      company.languages.some((lang) => lang.toLowerCase().includes(searchWord.toLowerCase().trim())) ||
-      company.tools.some((tool) => tool.toLowerCase().includes(searchWord.toLowerCase().trim()))
-    );
-  });
-
-  renderCompanies(filteredData)
+  filteredData = filtered(data, searchWords);
+  renderCompanies(filteredData);
+  displayBtn(searchWords);
 });
 
+function renderCompanies(array) {
+  let finalString = ``;
 
-function renderCompanies (array) {
-
-let finalString = ``;
-
-array.forEach((company) => {
-  const companyTemplate = `
+  array.forEach((company) => {
+    const companyTemplate = `
     
       <div class="company">
         <img src="${company.logo}" alt="" />
@@ -242,9 +237,50 @@ array.forEach((company) => {
     
     `;
 
-  finalString += companyTemplate;
-});
+    finalString += companyTemplate;
+  });
 
-mainElement.innerHTML = finalString;
+  mainElement.innerHTML = finalString;
+}
 
+function displayBtn(words) {
+  let finalString = ``;
+
+  words.forEach((word) => {
+    const template = `
+   <button class="tech">
+          <span class="title">${word}</span>
+          <span class="closeBtn" onClick="handleClick( '${word}')"
+            ><img src="./images/icon-remove.svg" alt=""
+          /></span>
+        </button>
+  `;
+
+    finalString += template;
+  });
+
+  document.querySelector(".search-box").innerHTML = finalString;
+}
+
+function handleClick(word) {
+  searchWords = searchWords.filter((item) => {
+    return item !== word;
+  });
+  filteredData = filtered(data, searchWords);
+  renderCompanies(filteredData);
+  displayBtn(searchWords);
+  searchInput.value = searchWords;
+}
+
+function filtered(data, searchWords) {
+  return data.filter((company) => {
+    return searchWords.every((word) => {
+      return (
+        company.role.toLowerCase().includes(word) ||
+        company.level.toLowerCase().includes(word) ||
+        company.languages.some((lang) => lang.toLowerCase().includes(word)) ||
+        company.tools.some((tool) => tool.toLowerCase().includes(word))
+      );
+    });
+  });
 }
